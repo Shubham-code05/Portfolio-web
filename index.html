@@ -2,6 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Apply the saved/system theme before first paint (avoids a light flash in dark mode).
+         Mirrors src/theme/ThemeProvider.jsx; localStorage key: "theme". -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          var dark = t === "dark" || (t !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+          var r = dark ? "dark" : "light";
+          document.documentElement.dataset.theme = r;
+          document.documentElement.style.colorScheme = r;
+        } catch (e) {}
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Shubham Prajapati | Software Engineer</title>
@@ -47,6 +60,10 @@
         "@type": "Person",
         "name": "Shubham Prajapati",
         "jobTitle": "Software Engineer",
+        "sameAs": [
+          "https://github.com/Shubham-code05",
+          "https://www.linkedin.com/in/shubham-prajapati-a986b3251/"
+        ],
         "alumniOf": {
           "@type": "CollegeOrUniversity",
           "name": "Khwaja Moinuddin Chishti Language University",

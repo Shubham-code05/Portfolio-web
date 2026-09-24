@@ -11,7 +11,7 @@ export default function EducationCard({ education }) {
           aria-hidden="true"
           className="absolute inset-0 bg-[radial-gradient(circle,rgba(22,163,74,0.12)_1px,transparent_1px)] [background-size:16px_16px]"
         />
-        <span className="relative flex size-14 shrink-0 items-center justify-center rounded-2xl bg-accent text-white shadow-md shadow-accent/25 transition-transform duration-300 group-hover:-rotate-6">
+        <span className="relative flex size-14 shrink-0 items-center justify-center rounded-2xl bg-accent text-on-accent shadow-md shadow-accent/25 transition-transform duration-300 group-hover:-rotate-6">
           <GraduationCap size={28} strokeWidth={1.75} aria-hidden="true" />
         </span>
         <div className="relative">

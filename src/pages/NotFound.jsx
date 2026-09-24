@@ -16,7 +16,7 @@ export default function NotFound() {
         </p>
         <Link
           to="/"
-          className="group mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-sm shadow-accent/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent-hover"
+          className="group mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-on-accent shadow-sm shadow-accent/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent-hover"
         >
           <ArrowLeft size={16} className="transition-transform duration-200 group-hover:-translate-x-1" />
           Back to Home

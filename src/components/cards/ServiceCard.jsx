@@ -12,7 +12,7 @@ export default function ServiceCard({ service, index }) {
       />
 
       <div className="flex items-start justify-between">
-        <span className="flex size-14 items-center justify-center rounded-2xl border border-accent/15 bg-accent-soft text-accent transition-all duration-300 group-hover:-rotate-6 group-hover:bg-accent group-hover:text-white group-hover:shadow-lg group-hover:shadow-accent/25">
+        <span className="flex size-14 items-center justify-center rounded-2xl border border-accent/15 bg-accent-soft text-accent transition-all duration-300 group-hover:-rotate-6 group-hover:bg-accent group-hover:text-on-accent group-hover:shadow-lg group-hover:shadow-accent/25">
           <Icon size={26} strokeWidth={1.75} aria-hidden="true" />
         </span>
         <span aria-hidden="true" className="text-sm font-semibold tabular-nums text-muted/50 transition-colors duration-300 group-hover:text-accent">

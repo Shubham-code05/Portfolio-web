@@ -5,7 +5,7 @@ export default function SkillCard({ category }) {
     <article className="group flex h-full flex-col rounded-3xl border border-border bg-background p-5 shadow-[0_1px_2px_rgba(15,21,18,0.04)] transition-[translate,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-accent/25 hover:shadow-[0_18px_40px_-16px_rgba(15,21,18,0.14)] sm:p-7">
       <div className="flex items-center justify-between gap-4">
         <div className="flex min-w-0 items-center gap-3">
-          <span className="flex size-11 items-center justify-center rounded-2xl bg-accent-soft text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-white group-hover:shadow-md group-hover:shadow-accent/25">
+          <span className="flex size-11 items-center justify-center rounded-2xl bg-accent-soft text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-on-accent group-hover:shadow-md group-hover:shadow-accent/25">
             <Icon size={20} aria-hidden="true" />
           </span>
           <h2 className="text-lg font-semibold tracking-tight">{title}</h2>

@@ -82,7 +82,7 @@ export default function Footer() {
                       href={href}
                       className="group inline-flex items-center gap-3 text-sm text-muted transition-colors duration-200 hover:text-foreground"
                     >
-                      <span className="flex size-9 items-center justify-center rounded-full border border-border bg-background text-foreground/70 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-accent group-hover:bg-accent group-hover:text-white">
+                      <span className="flex size-9 items-center justify-center rounded-full border border-border bg-background text-foreground/70 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-accent group-hover:bg-accent group-hover:text-on-accent">
                         <Icon size={16} aria-hidden="true" />
                       </span>
                       {label}

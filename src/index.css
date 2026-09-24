@@ -1,7 +1,10 @@
 @import 'tailwindcss';
 
-/* Design tokens — exposed as Tailwind utilities (e.g. bg-background, text-accent) */
+/* Design tokens — exposed as Tailwind utilities (e.g. bg-background, text-accent).
+   Values below are the LIGHT theme; the dark theme overrides them further down. */
 @theme {
+  /* Page canvas (body). Cards/navbar use `background`, which matches the page in light mode. */
+  --color-page: #ffffff;
   --color-background: #ffffff;
   --color-surface: #f8faf9;
   --color-border: #e8ecea;
@@ -11,14 +14,19 @@
   --color-accent: #15803d;
   --color-accent-hover: #166534;
   --color-accent-soft: #ecfdf3;
-  /* brighter green for accents on the dark contact panel (5.7:1 on foreground) */
+  /* brighter green for accents on the dark CTA panels (5.7:1 on panel) */
   --color-accent-bright: #16a34a;
+  /* text/icon colour on solid accent backgrounds (buttons, filled icon tiles) */
+  --color-on-accent: #ffffff;
+  /* always-dark CTA panels (Contact, About CTA) */
+  --color-panel: #0f1512;
 
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
 
   --animate-marquee: marquee 40s linear infinite;
   --animate-nav-in: nav-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-photo-in: photo-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+  --animate-menu-in: menu-in 0.16s cubic-bezier(0.22, 1, 0.36, 1) both;
 
   @keyframes marquee {
     to {
@@ -39,14 +47,54 @@
       transform: translateY(-100%);
     }
   }
+
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(-4px);
+    }
+  }
+}
+
+/* Dark theme — a designed palette, not an inversion. Applied via <html data-theme="dark">
+   (set by ThemeProvider, and before first paint by the inline script in index.html). */
+:root[data-theme='dark'] {
+  --color-page: #0a0d0c;
+  --color-background: #131816; /* cards, navbar, dropdowns */
+  --color-surface: #0f1312; /* section bands, inset chips */
+  --color-border: #252c29;
+  --color-foreground: #e9edeb;
+  --color-muted: #9aa49f;
+  --color-accent: #22c55e;
+  --color-accent-hover: #4ade80;
+  --color-accent-soft: #10251a;
+  --color-accent-bright: #4ade80;
+  --color-on-accent: #04130a;
+  --color-panel: #0f1d16;
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+/* Prevent a half-animated flash of colours while switching themes */
+[data-theme-switching] *,
+[data-theme-switching] *::before,
+[data-theme-switching] *::after {
+  transition: none !important;
 }
 
 @layer base {
   /* No global smooth scrolling: route changes must reset/restore scroll instantly.
      "Back to top" opts into smooth scrolling explicitly. */
 
+  html {
+    background-color: var(--color-page);
+  }
+
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-page text-foreground font-sans antialiased;
   }
 
   ::selection {

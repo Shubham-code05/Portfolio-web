@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
 import Avatar from './ui/Avatar'
-import { CONTACT_PATH, NAV_LINKS, PROFILE } from '../data/portfolioData'
+import ThemeToggle from './ThemeToggle'
+import { EMAIL_HREF, NAV_LINKS, PROFILE } from '../data/portfolioData'
 
 // Must match Tailwind's `xl` breakpoint, where the desktop nav appears
 const DESKTOP_QUERY = '(min-width: 80rem)'
@@ -21,19 +22,20 @@ function StatusIndicator() {
   )
 }
 
-// Display (inline-flex/hidden) is set by the caller so responsive visibility classes never conflict
-function ContactButton({ className = '' }) {
+// Opens the visitor's mail client. Display (inline-flex/hidden) is set by the caller so responsive visibility classes never conflict
+function ContactButton({ onClick, className = '' }) {
   return (
-    <Link
-      to={CONTACT_PATH}
-      className={`group items-center justify-center gap-1.5 rounded-full bg-accent px-4 py-2 text-sm font-medium text-white shadow-sm shadow-accent/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent-hover hover:shadow-md hover:shadow-accent/25 ${className}`}
+    <a
+      href={EMAIL_HREF}
+      onClick={onClick}
+      className={`group items-center justify-center gap-1.5 rounded-full bg-accent px-4 py-2 text-sm font-medium text-on-accent shadow-sm shadow-accent/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent-hover hover:shadow-md hover:shadow-accent/25 ${className}`}
     >
       Contact Me
       <ArrowUpRight
         size={16}
         className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
       />
-    </Link>
+    </a>
   )
 }
 
@@ -119,7 +121,8 @@ export default function Navbar() {
             </ul>
           </nav>
 
-          <div className="flex shrink-0 items-center gap-3">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+            <ThemeToggle />
             <div className="hidden xl:block">
               <StatusIndicator />
             </div>
@@ -164,7 +167,7 @@ export default function Navbar() {
 
               <div className="mt-4 flex flex-col gap-3 border-t border-border pt-4 sm:flex-row sm:items-center sm:justify-between">
                 <StatusIndicator />
-                <ContactButton className="inline-flex sm:hidden" />
+                <ContactButton onClick={closeMenu} className="inline-flex sm:hidden" />
               </div>
             </nav>
           </div>
@@ -175,7 +178,7 @@ export default function Navbar() {
       <div
         aria-hidden="true"
         onClick={closeMenu}
-        className={`fixed inset-0 z-40 bg-foreground/10 backdrop-blur-[2px] transition-opacity duration-300 xl:hidden ${
+        className={`fixed inset-0 z-40 bg-panel/10 backdrop-blur-[2px] transition-opacity duration-300 xl:hidden ${
           isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
         }`}
       />

@@ -1,29 +1,19 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Download } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, FileText, Link2 } from 'lucide-react'
 import Container from '../ui/Container'
 import Reveal from '../ui/Reveal'
 import ActionLink from '../ui/ActionLink'
-import { CONTACT_LINKS, CONTACT_PATH, HERO, PROFILE, RESUME_URL } from '../../data/portfolioData'
+import { CONTACT_LINKS, HERO, PROFILE, RESUME } from '../../data/portfolioData'
 
 const SOCIAL_LINKS = HERO.socials.map((label) => CONTACT_LINKS.find((link) => link.label === label)).filter(Boolean)
 
-const SOCIAL_LABELS = {
-  GitHub: 'GitHub profile',
-  LinkedIn: 'LinkedIn profile',
-  Email: 'Send an email',
-}
+const ICON_LINK_CLASS =
+  'flex size-10 items-center justify-center rounded-full border border-border bg-background text-foreground/70 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-on-accent'
 
-function AvailabilityBadge() {
-  return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-soft px-3.5 py-1.5 text-xs font-semibold text-accent">
-      <span className="relative flex size-2">
-        <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60 motion-reduce:animate-none" />
-        <span className="relative inline-flex size-2 rounded-full bg-accent" />
-      </span>
-      {HERO.badge}
-    </span>
-  )
-}
+const BUTTON_BASE =
+  'group inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold whitespace-nowrap transition-all duration-200 hover:-translate-y-0.5 md:px-4 lg:px-6'
+const BUTTON_PRIMARY = `${BUTTON_BASE} bg-accent text-on-accent shadow-md shadow-accent/20 hover:bg-accent-hover hover:shadow-lg hover:shadow-accent/25`
+const BUTTON_SECONDARY = `${BUTTON_BASE} border border-border bg-background text-foreground shadow-sm hover:border-accent/30 hover:text-accent hover:shadow-md`
 
 function ProfilePhoto() {
   return (
@@ -75,84 +65,90 @@ export default function Hero() {
       <Container className="relative grid min-h-[calc(100svh-4rem)] content-center gap-x-10 gap-y-12 py-14 sm:py-16 md:grid-cols-[1.45fr_1fr] md:gap-y-10 lg:grid-cols-[1.15fr_1fr] lg:gap-x-16">
         {/* Content — mobile: first, centered · md+: left column */}
         <div className="text-center md:col-start-1 md:row-start-1 md:text-left">
+          {/* 1 — Small uppercase title */}
           <Reveal>
-            <AvailabilityBadge />
+            <p className="inline-flex items-center gap-3 text-xs font-semibold tracking-[0.28em] text-accent uppercase sm:text-sm">
+              <span aria-hidden="true" className="h-px w-8 bg-accent/60" />
+              {HERO.eyebrow}
+              {/* Mirrored line balances the centered mobile layout */}
+              <span aria-hidden="true" className="h-px w-8 bg-accent/60 md:hidden" />
+            </p>
           </Reveal>
 
+          {/* 2 — Name */}
           <Reveal delay={80}>
-            <h1 className="mt-6 tracking-tight">
-              <span className="block text-2xl font-medium text-muted sm:text-3xl">{HERO.greeting}</span>{' '}
-              <span className="mt-1 block text-4xl leading-[1.05] font-bold text-foreground sm:text-5xl lg:text-6xl">
-                {PROFILE.name}
-                <span className="text-accent">.</span>
-              </span>
+            <h1 className="mt-5 text-5xl leading-[1.02] font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+              {PROFILE.name}
+              <span className="text-accent">.</span>
             </h1>
           </Reveal>
 
+          {/* 3 — Tagline */}
           <Reveal delay={160}>
-            {/* Separator trails each role (except the last) so a wrapped line never starts with "|" */}
-            <p className="mt-5 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-base font-semibold text-foreground/85 sm:text-lg md:justify-start">
-              {HERO.subtitle.map((role, index) => (
-                <span key={role} className="inline-flex items-center gap-x-2.5 whitespace-nowrap">
-                  {role}
-                  {index < HERO.subtitle.length - 1 && (
-                    <span aria-hidden="true" className="text-accent/50">
+            <p className="mx-auto mt-6 max-w-xl text-xl leading-snug font-medium text-balance text-foreground/85 sm:text-2xl md:mx-0">
+              {HERO.tagline}
+            </p>
+          </Reveal>
+
+          {/* 4 — Keywords (a list so screen readers announce items separately; "|" is decorative) */}
+          <Reveal delay={240}>
+            <ul
+              aria-label="Core technologies"
+              className="mt-6 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1.5 font-mono text-[13px] text-muted sm:text-sm md:justify-start"
+            >
+              {HERO.keywords.map((keyword, index) => (
+                <li key={keyword} className="inline-flex items-center gap-x-2.5 whitespace-nowrap">
+                  {keyword}
+                  {index < HERO.keywords.length - 1 && (
+                    <span aria-hidden="true" className="text-accent/60">
                       |
                     </span>
                   )}
-                </span>
-              ))}
-            </p>
-          </Reveal>
-
-          <Reveal delay={240}>
-            <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-lg md:mx-0">
-              {HERO.intro}
-            </p>
-          </Reveal>
-
-          <Reveal delay={320} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center md:justify-start">
-            <Link
-              to="/projects"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 whitespace-nowrap md:px-5 lg:px-6 text-sm font-semibold text-white shadow-md shadow-accent/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent-hover hover:shadow-lg hover:shadow-accent/25"
-            >
-              View My Projects
-              <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />
-            </Link>
-            <ActionLink
-              href={RESUME_URL}
-              download
-              className="group inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background px-6 py-3 whitespace-nowrap md:px-5 lg:px-6 text-sm font-semibold text-foreground shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/30 hover:text-accent hover:shadow-md"
-            >
-              Download Resume
-              <Download size={16} className="transition-transform duration-200 group-hover:translate-y-0.5" />
-            </ActionLink>
-          </Reveal>
-
-          <Reveal delay={400} className="mt-6 flex flex-wrap items-center justify-center gap-4 md:justify-start">
-            <Link
-              to={CONTACT_PATH}
-              className="group inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-accent-hover"
-            >
-              Let&apos;s connect
-              <ArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-1" />
-            </Link>
-
-            <span aria-hidden="true" className="h-5 w-px bg-border" />
-
-            <ul className="flex items-center gap-2">
-              {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
-                <li key={label}>
-                  <ActionLink
-                    href={href}
-                    aria-label={SOCIAL_LABELS[label] ?? label}
-                    className="flex size-10 items-center justify-center rounded-full border border-border bg-background text-foreground/70 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-white"
-                  >
-                    <Icon size={17} aria-hidden="true" />
-                  </ActionLink>
                 </li>
               ))}
             </ul>
+          </Reveal>
+
+          {/* 5 — Current work */}
+          <Reveal delay={300}>
+            <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-lg md:mx-0">
+              {HERO.description}
+            </p>
+          </Reveal>
+
+          {/* 6 — Social icons */}
+          <Reveal as="ul" delay={360} className="mt-7 flex items-center justify-center gap-2 md:justify-start">
+            {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
+              <li key={label}>
+                <ActionLink href={href} aria-label={label} className={ICON_LINK_CLASS}>
+                  <Icon size={17} aria-hidden="true" />
+                </ActionLink>
+              </li>
+            ))}
+          </Reveal>
+
+          {/* 7 — CTAs. Mobile: primary full width, the other two side by side */}
+          <Reveal
+            delay={420}
+            className="mt-8 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:justify-center md:justify-start md:gap-2.5 lg:gap-3"
+          >
+            <Link to="/projects" className={`${BUTTON_PRIMARY} col-span-2`}>
+              View Projects
+              <ArrowRight size={16} aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1" />
+            </Link>
+            <a href={RESUME.url} target="_blank" rel="noopener noreferrer" className={BUTTON_SECONDARY}>
+              <FileText size={16} aria-hidden="true" />
+              Resume
+            </a>
+            <Link to={HERO.allLinksPath} className={BUTTON_SECONDARY}>
+              <Link2 size={16} aria-hidden="true" />
+              All Links
+              <ArrowUpRight
+                size={14}
+                aria-hidden="true"
+                className="text-muted transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent md:max-lg:hidden"
+              />
+            </Link>
           </Reveal>
         </div>
 

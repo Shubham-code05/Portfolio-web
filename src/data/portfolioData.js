@@ -1,6 +1,7 @@
 import {
   Atom,
   Binary,
+  BookOpen,
   Bot,
   Braces,
   BrainCircuit,
@@ -11,10 +12,11 @@ import {
   Gift,
   GitBranch,
   Globe,
-  GraduationCap,
+  Hammer,
   Hexagon,
   Layers,
   Leaf,
+  Lightbulb,
   ListChecks,
   Mail,
   MonitorSmartphone,
@@ -24,6 +26,7 @@ import {
   SquareTerminal,
   Triangle,
   Webhook,
+  Workflow,
   Wrench,
 } from 'lucide-react'
 import GithubIcon from '../components/ui/icons/GithubIcon'
@@ -45,15 +48,31 @@ export const PROFILE = {
 }
 
 /* ------------------------------------------------------------------ */
+/* Links & resume (single source of truth)                             */
+/* ------------------------------------------------------------------ */
+
+export const EMAIL = 'ishubham5999@gmail.com'
+export const EMAIL_HREF = `mailto:${EMAIL}`
+export const GITHUB_URL = 'https://github.com/Shubham-code05'
+export const LINKEDIN_URL = 'https://www.linkedin.com/in/shubham-prajapati-a986b3251/'
+
+// Served from public/image/resume.png — use the root-relative public path, never an import
+export const RESUME = {
+  url: '/image/resume.png',
+  downloadName: 'Shubham-Prajapati-Resume.png',
+}
+
+/* ------------------------------------------------------------------ */
 /* Home hero                                                           */
 /* ------------------------------------------------------------------ */
 
 export const HERO = {
-  badge: 'Available for opportunities',
-  greeting: "Hi, I'm",
-  subtitle: ['Software Engineer', 'MERN Stack Developer', 'AI Enthusiast'],
-  intro:
-    'B.Tech Computer Science & Engineering graduate with hands-on experience building scalable web applications, REST APIs, authentication systems, and AI-powered solutions.',
+  eyebrow: 'MERN & AI Engineer',
+  tagline: 'I build products, automate workflows, and solve real problems.',
+  keywords: ['JavaScript', 'TypeScript', 'Python', 'React', 'Node.js', 'AI Agents', 'Automation'],
+  description: 'Currently building AI-powered applications and automation workflows.',
+  // "All Links" CTA — the Profile page lists GitHub, LinkedIn, email and the resume
+  allLinksPath: '/profile',
   stats: [
     { value: '1+', label: 'Year Experience' },
     { value: '10+', label: 'Projects Built' },
@@ -130,7 +149,7 @@ export const PAGES = {
     title: 'Profile',
     badge: 'Profile',
     heading: 'Profile',
-    subtitle: 'Profile content coming soon.',
+    subtitle: 'Where to find me online, plus my resume.',
   },
 }
 
@@ -163,56 +182,125 @@ export const ABOUT = {
     "I'm a Computer Science & Engineering graduate with hands-on experience in MERN stack development. I enjoy building practical web applications, working with APIs and databases, and exploring AI-powered tools and automation.",
     'My current focus is improving my problem-solving skills, building production-ready applications and exploring how AI can be integrated into modern software workflows.',
   ],
-  highlights: [
-    { label: 'CSE Graduate', icon: GraduationCap },
-    { label: 'MERN Stack', icon: CodeXml },
-    { label: 'AI & Automation', icon: Sparkles },
+}
+
+// Content for the /about page (the Home intro above stays separate)
+export const ABOUT_PAGE = {
+  badge: 'About me',
+  title: 'Building Digital Products with Code & AI.',
+  subtitle:
+    'I’m Shubham Prajapati, a Computer Science & Engineering graduate focused on building modern full-stack applications and exploring practical AI-powered solutions.',
+  location: 'Lucknow, Uttar Pradesh, India',
+  // Standalone "About" statement — kept short; details live in the sections below it
+  about:
+    'I’m a developer who enjoys turning ideas into useful software. I like working across the web stack, building reliable backend systems, and exploring AI-driven solutions and automation. For me, the best way to learn is to build, experiment, and solve problems that have real-world value.',
+  whatIDo: [
+    {
+      title: 'Full-Stack Development',
+      icon: Layers,
+      description:
+        'Building responsive frontend experiences and scalable backend systems using modern JavaScript technologies.',
+    },
+    {
+      title: 'AI-Powered Development',
+      icon: BrainCircuit,
+      description: 'Exploring LLM-powered applications, AI-assisted coding, and practical AI integrations.',
+    },
+    {
+      title: 'Backend & APIs',
+      icon: Webhook,
+      description:
+        'Designing REST APIs, authentication systems, database-driven applications, and backend workflows.',
+    },
+    {
+      title: 'Automation',
+      icon: Workflow,
+      description:
+        'Building AI-assisted workflows and automation solutions that reduce repetitive development tasks.',
+    },
   ],
-  focus: [
-    { label: 'Full-Stack Web Development', icon: Layers },
-    { label: 'AI & Automation', icon: Sparkles },
-    { label: 'REST API Development', icon: Webhook },
-    { label: 'Database Management', icon: Database },
-    { label: 'Data Structures & Algorithms', icon: Binary },
+  exploring: [
+    'MERN Stack',
+    'AI Applications',
+    'AI Agents',
+    'AI Automation',
+    'LLM Integration',
+    'REST APIs',
+    'Backend Systems',
+    'Database Systems',
+    'Cloud Deployment',
+    'DSA & Problem Solving',
   ],
-  // Placeholder until a destination is provided
-  readMoreUrl: '#',
+  toolkit: [
+    'HTML',
+    'CSS',
+    'JavaScript',
+    'React.js',
+    'Node.js',
+    'Express.js',
+    'MongoDB',
+    'PostgreSQL',
+    'Git',
+    'GitHub',
+    'Vercel',
+    'Render',
+  ],
+  education: {
+    period: '2022 — 2026',
+    region: 'Lucknow, Uttar Pradesh',
+    cgpa: '7.87',
+  },
+  currentFocus: {
+    title: 'Currently Building & Learning',
+    text: 'Currently focused on strengthening full-stack engineering, Python and Data Structures & Algorithms, while building deeper expertise in AI-assisted development, AI agents, automation workflows, and LLM-powered applications.',
+    areas: ['Full-Stack Engineering', 'Python', 'DSA', 'AI Agents', 'Automation Workflows', 'LLM Applications'],
+  },
+  approach: [
+    { title: 'Build', icon: Hammer, text: 'Turn ideas into working products.' },
+    { title: 'Learn', icon: BookOpen, text: 'Keep improving through projects and problem solving.' },
+    { title: 'Solve', icon: Lightbulb, text: 'Focus on practical, maintainable solutions.' },
+  ],
+  cta: {
+    title: 'Let’s build something meaningful.',
+    subtitle: 'Have an idea, opportunity, or project in mind? Let’s connect.',
+  },
 }
 
 /* ------------------------------------------------------------------ */
 /* Skills                                                              */
 /* ------------------------------------------------------------------ */
 
+// Each skill appears in exactly one category; the card's "N skills" count is derived from the array
 export const SKILL_CATEGORIES = [
+  {
+    title: 'Programming',
+    icon: CodeXml,
+    skills: ['JavaScript', 'TypeScript', 'Python', 'Java'],
+  },
   {
     title: 'Frontend',
     icon: MonitorSmartphone,
-    skills: ['HTML', 'CSS', 'JavaScript', 'React.js', 'Tailwind CSS'],
+    skills: ['HTML', 'CSS', 'React.js', 'Tailwind CSS', 'Vite'],
   },
   {
     title: 'Backend',
     icon: Server,
-    skills: ['Node.js', 'Express.js', 'REST APIs'],
+    skills: ['Node.js', 'Express.js', 'REST APIs', 'JWT Authentication'],
   },
   {
     title: 'Database',
     icon: Database,
-    skills: ['MongoDB', 'PostgreSQL'],
-  },
-  {
-    title: 'Programming',
-    icon: CodeXml,
-    skills: ['JavaScript', 'Python'],
+    skills: ['MongoDB', 'PostgreSQL', 'MySQL'],
   },
   {
     title: 'Tools',
     icon: Wrench,
-    skills: ['Git', 'GitHub', 'Vercel', 'Render'],
+    skills: ['Git', 'GitHub', 'Vercel', 'Render', 'Postman'],
   },
   {
     title: 'AI & Automation',
     icon: BrainCircuit,
-    skills: ['AI Tools', 'AI Agents', 'Automation Workflows', 'LLM-based Applications'],
+    skills: ['AI Agents', 'LLM Applications', 'AI Automation', 'Automation Workflows'],
   },
 ]
 
@@ -283,7 +371,7 @@ export const PROJECTS = [
 ]
 
 // External archive (e.g. GitHub repositories) shown on the Projects page
-export const ALL_PROJECTS_URL = '#'
+export const ALL_PROJECTS_URL = `${GITHUB_URL}?tab=repositories`
 
 /* ------------------------------------------------------------------ */
 /* Experience                                                          */
@@ -348,14 +436,9 @@ export const EDUCATION = [
 /* Contact                                                             */
 /* ------------------------------------------------------------------ */
 
-// Placeholders ('#') until real details are provided. When updating:
-//   email  → EMAIL_HREF: 'mailto:you@example.com', and the Email row's value: 'you@example.com'
-//   resume → put the PDF in /public and set RESUME_URL: '/resume.pdf'
-export const EMAIL_HREF = '#'
-export const RESUME_URL = '#'
-
+// http(s) links open in a new tab with rel="noopener noreferrer" (see ActionLink); mailto opens the mail client
 export const CONTACT_LINKS = [
-  { label: 'Email', value: 'Coming soon', href: EMAIL_HREF, icon: Mail },
-  { label: 'LinkedIn', value: 'Coming soon', href: '#', icon: LinkedinIcon },
-  { label: 'GitHub', value: 'Coming soon', href: '#', icon: GithubIcon },
+  { label: 'Email', value: EMAIL, href: EMAIL_HREF, icon: Mail },
+  { label: 'LinkedIn', value: 'linkedin.com/in/shubham-prajapati-a986b3251', href: LINKEDIN_URL, icon: LinkedinIcon },
+  { label: 'GitHub', value: 'github.com/Shubham-code05', href: GITHUB_URL, icon: GithubIcon },
 ]
