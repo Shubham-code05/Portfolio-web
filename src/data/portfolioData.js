@@ -378,14 +378,25 @@ export const ALL_PROJECTS_URL = `${GITHUB_URL}?tab=repositories`
 /* ------------------------------------------------------------------ */
 
 // Timeline entries, newest first. Add another role by copying the template below.
+// Optional fields (description, tech) are simply not rendered when omitted.
 export const EXPERIENCE = [
+  {
+    role: 'Full Stack Developer Intern',
+    company: 'UpToSkills',
+    type: 'Internship',
+    period: '13 April 2026 – 13 July 2026',
+    responsibilities: [
+      'Contributed to full-stack web development tasks',
+      'Worked on application development and implementation',
+      'Collaborated on assigned development tasks',
+      'Applied web development concepts in practical projects',
+    ],
+  },
   {
     role: 'MERN Full Stack Developer Intern',
     company: 'Hanumant Technology Pvt. Ltd.',
     type: 'Internship',
-    period: 'February 2025 – July 2025',
-    description:
-      'Worked on MERN stack development and contributed to web application development using React, Node.js, Express.js and MongoDB.',
+    period: 'February 2025 – March 2026',
     responsibilities: [
       'Developed responsive web application components',
       'Worked with REST APIs',

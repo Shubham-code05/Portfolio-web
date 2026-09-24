@@ -1,8 +1,10 @@
+import { useCallback, useState } from 'react'
 import { ArrowUpRight, Download, FileText, Send } from 'lucide-react'
 import Section from '../ui/Section'
 import Reveal from '../ui/Reveal'
 import ActionLink from '../ui/ActionLink'
-import { CONTACT_LINKS, EMAIL_HREF, RESUME } from '../../data/portfolioData'
+import ContactModal from '../ContactModal'
+import { CONTACT_LINKS, RESUME } from '../../data/portfolioData'
 
 function ContactRow({ label, value, href, icon: Icon }) {
   return (
@@ -29,6 +31,9 @@ function ContactRow({ label, value, href, icon: Icon }) {
 }
 
 export default function Contact() {
+  const [isContactOpen, setIsContactOpen] = useState(false)
+  const closeContact = useCallback(() => setIsContactOpen(false), [])
+
   return (
     <Section id="contact">
       <Reveal className="relative isolate overflow-hidden rounded-[2rem] bg-panel px-6 py-12 sm:rounded-[2.5rem] sm:px-10 sm:py-16 lg:px-16 lg:py-20">
@@ -67,8 +72,10 @@ export default function Contact() {
             </Reveal>
 
             <Reveal delay={450} className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ActionLink
-                href={EMAIL_HREF}
+              <button
+                type="button"
+                onClick={() => setIsContactOpen(true)}
+                aria-haspopup="dialog"
                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-on-accent shadow-lg shadow-accent/25 transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent-hover hover:shadow-accent/35"
               >
                 Get In Touch
@@ -76,7 +83,7 @@ export default function Contact() {
                   size={16}
                   className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 />
-              </ActionLink>
+              </button>
               <div className="flex gap-3">
                 <a
                   href={RESUME.url}
@@ -109,6 +116,7 @@ export default function Contact() {
           </ul>
         </div>
       </Reveal>
+      <ContactModal open={isContactOpen} onClose={closeContact} />
     </Section>
   )
 }
