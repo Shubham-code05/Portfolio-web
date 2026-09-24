@@ -1,3 +1,4 @@
+import Reveal from '../ui/Reveal'
 import { TECH_STACK } from '../../data/techStack'
 
 function TechList({ hidden = false }) {
@@ -24,18 +25,20 @@ export default function TechStack() {
       aria-label="Technology stack"
       className="border-y border-border bg-surface py-8 sm:py-10"
     >
-      <p className="mb-5 text-center text-[11px] font-semibold tracking-[0.2em] text-muted uppercase">
-        Technologies I work with
-      </p>
+      <Reveal>
+        <p className="mb-5 text-center text-[11px] font-semibold tracking-[0.2em] text-muted uppercase">
+          Technologies I work with
+        </p>
 
-      {/* Edge fade keeps items from hard-cutting at the viewport sides.
-          With reduced motion the loop stops and the strip becomes manually scrollable. */}
-      <div className="group overflow-hidden motion-reduce:overflow-x-auto [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-        <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none">
-          <TechList />
-          <TechList hidden />
+        {/* Edge fade keeps items from hard-cutting at the viewport sides.
+            With reduced motion the loop stops and the strip becomes manually scrollable. */}
+        <div className="group overflow-hidden motion-reduce:overflow-x-auto [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+          <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none">
+            <TechList />
+            <TechList hidden />
+          </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }

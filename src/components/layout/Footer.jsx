@@ -8,7 +8,7 @@ import { PROFILE } from '../../data/profile'
 
 function FooterHeading({ children }) {
   return (
-    <h3 className="text-[11px] font-semibold tracking-[0.18em] text-foreground uppercase">{children}</h3>
+    <h2 className="text-[11px] font-semibold tracking-[0.18em] text-foreground uppercase">{children}</h2>
   )
 }
 
@@ -23,6 +23,7 @@ export default function Footer() {
               <Avatar
                 src={PROFILE.avatar}
                 name={PROFILE.name}
+              decorative
                 className="size-10 transition-transform duration-200 group-hover:scale-105"
               />
               <span className="flex flex-col leading-tight">
@@ -43,9 +44,9 @@ export default function Footer() {
                   <li key={href}>
                     <a
                       href={href}
-                      className="group inline-flex items-center gap-2 text-sm text-muted transition-colors duration-200 hover:text-accent"
+                      className="group inline-flex items-center text-sm text-muted transition-colors duration-200 hover:text-accent"
                     >
-                      <span className="h-px w-0 bg-accent transition-all duration-200 group-hover:w-3" />
+                      <span aria-hidden="true" className="h-px w-0 bg-accent transition-all duration-200 group-hover:mr-2 group-hover:w-3" />
                       {label}
                     </a>
                   </li>

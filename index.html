@@ -3,18 +3,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Personal developer portfolio" />
+
+    <title>Shubham Prajapati | Software Engineer</title>
+    <meta
+      name="description"
+      content="Shubham Prajapati — Computer Science graduate focused on MERN stack development, AI, automation and modern web applications."
+    />
+    <meta name="author" content="Shubham Prajapati" />
+    <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#ffffff" />
+
+    <!-- Open Graph / social previews. og:url, og:image and canonical are injected at build time
+         when VITE_SITE_URL is set (they must be absolute URLs) — see vite.config.js -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Shubham Prajapati" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Shubham Prajapati | Software Engineer" />
+    <meta
+      property="og:description"
+      content="Shubham Prajapati — Computer Science graduate focused on MERN stack development, AI, automation and modern web applications."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Shubham Prajapati | Software Engineer" />
+    <meta
+      name="twitter:description"
+      content="Shubham Prajapati — Computer Science graduate focused on MERN stack development, AI, automation and modern web applications."
+    />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <title>Shubham Prajapati — Software Engineer</title>
+
+    <!-- Structured data: only facts stated on the page -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Shubham Prajapati",
+        "jobTitle": "Software Engineer",
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Khwaja Moinuddin Chishti Language University",
+          "address": "Lucknow"
+        },
+        "knowsAbout": ["MERN Stack", "React.js", "Node.js", "Express.js", "MongoDB", "AI & Automation"]
+      }
+    </script>
   </head>
   <body>
+    <noscript>This portfolio requires JavaScript to display its content.</noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

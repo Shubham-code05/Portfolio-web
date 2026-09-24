@@ -11,6 +11,7 @@ export default function ActionLink({ href, children, ...props }) {
       <a
         href="#"
         onClick={(event) => event.preventDefault()}
+        aria-disabled="true"
         title="Link coming soon"
         {...props}
       >

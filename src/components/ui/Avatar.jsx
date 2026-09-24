@@ -7,11 +7,24 @@ function getInitials(name) {
     .toUpperCase()
 }
 
-export default function Avatar({ src, name, className = '' }) {
+/**
+ * `decorative` hides the avatar from assistive tech — use it when the name is already
+ * rendered as text next to it, so screen readers don't announce the name twice.
+ * `priority` loads the photo eagerly (above-the-fold usage like the navbar).
+ */
+export default function Avatar({ src, name, decorative = false, priority = false, className = '' }) {
   const base = `shrink-0 rounded-full ring-2 ring-accent/15 ring-offset-2 ring-offset-background ${className}`
 
   if (src) {
-    return <img src={src} alt={name} className={`${base} object-cover`} />
+    return (
+      <img
+        src={src}
+        alt={decorative ? '' : name}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding="async"
+        className={`${base} object-cover`}
+      />
+    )
   }
 
   return (

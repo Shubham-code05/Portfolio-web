@@ -4,7 +4,7 @@ export default function ServiceCard({ service, index }) {
   const { title, icon: Icon, description, features } = service
 
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-background p-7 shadow-[0_1px_2px_rgba(15,21,18,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:shadow-[0_18px_40px_-16px_rgba(15,21,18,0.14)] sm:p-8">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-background p-6 shadow-[0_1px_2px_rgba(15,21,18,0.04)] transition-[translate,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-accent/25 hover:shadow-[0_18px_40px_-16px_rgba(15,21,18,0.14)] sm:p-8">
       {/* Accent bar that sweeps in along the top edge on hover */}
       <span
         aria-hidden="true"
@@ -15,7 +15,7 @@ export default function ServiceCard({ service, index }) {
         <span className="flex size-14 items-center justify-center rounded-2xl border border-accent/15 bg-accent-soft text-accent transition-all duration-300 group-hover:-rotate-6 group-hover:bg-accent group-hover:text-white group-hover:shadow-lg group-hover:shadow-accent/25">
           <Icon size={26} strokeWidth={1.75} aria-hidden="true" />
         </span>
-        <span className="text-sm font-semibold tabular-nums text-muted/50 transition-colors duration-300 group-hover:text-accent">
+        <span aria-hidden="true" className="text-sm font-semibold tabular-nums text-muted/50 transition-colors duration-300 group-hover:text-accent">
           {String(index + 1).padStart(2, '0')}
         </span>
       </div>

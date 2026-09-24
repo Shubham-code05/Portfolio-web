@@ -7,17 +7,28 @@
   --color-border: #e8ecea;
   --color-foreground: #0f1512;
   --color-muted: #66706b;
-  --color-accent: #16a34a;
-  --color-accent-hover: #15803d;
+  /* green-700 keeps small text and white-on-green buttons above WCAG AA (4.5:1) */
+  --color-accent: #15803d;
+  --color-accent-hover: #166534;
   --color-accent-soft: #ecfdf3;
+  /* brighter green for accents on the dark contact panel (5.7:1 on foreground) */
+  --color-accent-bright: #16a34a;
 
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
 
   --animate-marquee: marquee 40s linear infinite;
+  --animate-nav-in: nav-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 
   @keyframes marquee {
     to {
       transform: translateX(-50%);
+    }
+  }
+
+  @keyframes nav-in {
+    from {
+      opacity: 0;
+      transform: translateY(-100%);
     }
   }
 }
@@ -27,8 +38,23 @@
     scroll-behavior: smooth;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent/15 text-accent-hover;
+  }
+
+  /* Consistent keyboard focus ring across all interactive elements */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
   }
 
   /* Offset anchor targets so the fixed navbar doesn't cover section headings */

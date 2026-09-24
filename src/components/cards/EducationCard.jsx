@@ -4,9 +4,9 @@ export default function EducationCard({ education }) {
   const { degree, field, university, location, status, year, grade, focus } = education
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-background shadow-[0_1px_2px_rgba(15,21,18,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:shadow-[0_18px_40px_-16px_rgba(15,21,18,0.14)] md:flex-row">
+    <article className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-background shadow-[0_1px_2px_rgba(15,21,18,0.04)] transition-[translate,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-accent/25 hover:shadow-[0_18px_40px_-16px_rgba(15,21,18,0.14)] md:flex-row">
       {/* Year panel */}
-      <div className="relative flex items-center gap-5 overflow-hidden border-b border-border bg-surface p-6 sm:p-8 md:w-64 md:shrink-0 md:flex-col md:items-start md:justify-between md:border-r md:border-b-0">
+      <div className="relative flex items-center gap-5 overflow-hidden border-b border-border bg-surface p-5 sm:p-8 md:w-64 md:shrink-0 md:flex-col md:items-start md:justify-between md:border-r md:border-b-0">
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-[radial-gradient(circle,rgba(22,163,74,0.12)_1px,transparent_1px)] [background-size:16px_16px]"
@@ -21,7 +21,7 @@ export default function EducationCard({ education }) {
       </div>
 
       {/* Details */}
-      <div className="flex-1 p-6 sm:p-8">
+      <div className="flex-1 p-5 sm:p-8">
         <span className="inline-flex rounded-full border border-accent/20 bg-accent-soft px-3 py-1 text-xs font-semibold text-accent">
           {degree}
         </span>

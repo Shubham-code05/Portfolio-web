@@ -15,6 +15,8 @@ function ProjectMedia({ project, index, featured }) {
         <img
           src={image}
           alt={`${title} preview`}
+          loading="lazy"
+          decoding="async"
           className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
       ) : (
@@ -36,10 +38,16 @@ function ProjectMedia({ project, index, featured }) {
         </>
       )}
 
+      {/* Soft green wash that rises on hover */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-t from-accent/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+      />
+
       <span className="absolute top-4 left-4 rounded-full border border-border bg-background/90 px-3 py-1 text-xs font-semibold text-accent backdrop-blur">
         {category}
       </span>
-      <span className="absolute top-4 right-4 text-xs font-semibold tracking-widest text-muted/70">
+      <span aria-hidden="true" className="absolute top-4 right-4 text-xs font-semibold tracking-widest text-muted/70">
         {String(index + 1).padStart(2, '0')}
       </span>
     </div>
@@ -51,13 +59,13 @@ export default function ProjectCard({ project, index }) {
 
   return (
     <article
-      className={`group flex flex-col overflow-hidden rounded-3xl border border-border bg-background shadow-[0_1px_2px_rgba(15,21,18,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:shadow-[0_18px_40px_-16px_rgba(15,21,18,0.14)] ${
-        featured ? 'md:col-span-2 lg:flex-row' : ''
+      className={`group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-background shadow-[0_1px_2px_rgba(15,21,18,0.04)] transition-[translate,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-accent/25 hover:shadow-[0_18px_40px_-16px_rgba(15,21,18,0.14)] ${
+        featured ? 'lg:flex-row' : ''
       }`}
     >
       <ProjectMedia project={project} index={index} featured={featured} />
 
-      <div className={`flex flex-1 flex-col p-6 sm:p-8 ${featured ? 'lg:justify-center lg:p-10' : ''}`}>
+      <div className={`flex flex-1 flex-col p-5 sm:p-8 ${featured ? 'lg:justify-center lg:p-10' : ''}`}>
         <h3 className={`font-semibold tracking-tight text-balance ${featured ? 'text-xl sm:text-2xl' : 'text-xl'}`}>
           {title}
         </h3>
@@ -67,7 +75,7 @@ export default function ProjectCard({ project, index }) {
           {tech.map((item) => (
             <li
               key={item}
-              className="rounded-full border border-border bg-surface px-2.5 py-1 text-xs font-medium text-foreground/75"
+              className="rounded-full border border-border bg-surface px-2.5 py-1 text-xs font-medium text-foreground/75 transition-colors duration-200 hover:border-accent/30 hover:bg-accent-soft hover:text-accent"
             >
               {item}
             </li>

@@ -1,5 +1,6 @@
 import Section from '../ui/Section'
 import SectionHeader from '../ui/SectionHeader'
+import Reveal from '../ui/Reveal'
 import EducationCard from '../cards/EducationCard'
 import { EDUCATION } from '../../data/education'
 
@@ -10,7 +11,9 @@ export default function Education() {
 
       <div className="mt-10 space-y-6 sm:mt-12">
         {EDUCATION.map((education) => (
-          <EducationCard key={`${education.degree}-${education.year}`} education={education} />
+          <Reveal key={`${education.degree}-${education.year}`}>
+            <EducationCard education={education} />
+          </Reveal>
         ))}
       </div>
     </Section>

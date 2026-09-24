@@ -13,8 +13,15 @@ import Contact from './components/sections/Contact'
 export default function App() {
   return (
     <>
+      {/* Lets keyboard users jump past the navbar; visible only when focused */}
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-full focus:bg-foreground focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+      >
+        Skip to content
+      </a>
       <Navbar />
-      <main>
+      <main id="main" tabIndex={-1} className="outline-none">
         <Hero />
         <TechStack />
         <About />

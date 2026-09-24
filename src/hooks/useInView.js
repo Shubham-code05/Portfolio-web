@@ -1,7 +1,23 @@
 import { useEffect, useRef, useState } from 'react'
 
+// One IntersectionObserver shared by every caller, instead of one per animated element
+const callbacks = new WeakMap()
+let sharedObserver = null
+
+function getObserver() {
+  sharedObserver ??= new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) callbacks.get(entry.target)?.()
+      })
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -10% 0px' },
+  )
+  return sharedObserver
+}
+
 /** Returns [ref, isInView]; flips to true once the element enters the viewport, then stops observing. */
-export default function useInView({ threshold = 0.15, rootMargin = '0px 0px -10% 0px' } = {}) {
+export default function useInView() {
   const ref = useRef(null)
   const [isInView, setIsInView] = useState(false)
 
@@ -9,19 +25,19 @@ export default function useInView({ threshold = 0.15, rootMargin = '0px 0px -10%
     const element = ref.current
     if (!element) return
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true)
-          observer.disconnect()
-        }
-      },
-      { threshold, rootMargin },
-    )
+    const observer = getObserver()
+    const stop = () => {
+      observer.unobserve(element)
+      callbacks.delete(element)
+    }
 
+    callbacks.set(element, () => {
+      setIsInView(true)
+      stop()
+    })
     observer.observe(element)
-    return () => observer.disconnect()
-  }, [threshold, rootMargin])
+    return stop
+  }, [])
 
   return [ref, isInView]
 }

@@ -22,12 +22,13 @@ function StatusIndicator() {
   )
 }
 
+// Display (inline-flex/hidden) is set by the caller so responsive visibility classes never conflict
 function ContactButton({ onClick, className = '' }) {
   return (
     <a
       href="#contact"
       onClick={onClick}
-      className={`group inline-flex items-center justify-center gap-1.5 rounded-full bg-accent px-4 py-2 text-sm font-medium text-white shadow-sm shadow-accent/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent-hover hover:shadow-md hover:shadow-accent/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${className}`}
+      className={`group items-center justify-center gap-1.5 rounded-full bg-accent px-4 py-2 text-sm font-medium text-white shadow-sm shadow-accent/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent-hover hover:shadow-md hover:shadow-accent/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${className}`}
     >
       Contact Me
       <ArrowUpRight
@@ -72,8 +73,10 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 border-b bg-background/85 backdrop-blur-md transition-[border-color,box-shadow] duration-300 ${
-          isElevated ? 'border-border shadow-[0_1px_12px_rgba(15,21,18,0.05)]' : 'border-transparent'
+        className={`fixed inset-x-0 top-0 z-50 animate-nav-in border-b backdrop-blur-md transition-[background-color,border-color,box-shadow] duration-300 motion-reduce:animate-none ${
+          isElevated
+            ? 'border-border bg-background/90 shadow-[0_1px_12px_rgba(15,21,18,0.05)]'
+            : 'border-transparent bg-background/70'
         }`}
       >
         <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
@@ -81,11 +84,13 @@ export default function Navbar() {
             <Avatar
               src={PROFILE.avatar}
               name={PROFILE.name}
+              decorative
+              priority
               className="size-9 transition-transform duration-200 group-hover:scale-105"
             />
             <span className="flex min-w-0 flex-col leading-tight">
               <span className="truncate text-sm font-semibold tracking-tight">{PROFILE.name}</span>
-              <span className="text-[10px] font-medium tracking-[0.16em] text-muted uppercase">
+              <span className="text-[10px] font-medium whitespace-nowrap tracking-[0.16em] text-muted uppercase">
                 {PROFILE.role}
               </span>
             </span>
@@ -167,7 +172,7 @@ export default function Navbar() {
 
               <div className="mt-4 flex flex-col gap-3 border-t border-border pt-4 sm:flex-row sm:items-center sm:justify-between">
                 <StatusIndicator />
-                <ContactButton onClick={closeMenu} className="sm:hidden" />
+                <ContactButton onClick={closeMenu} className="inline-flex sm:hidden" />
               </div>
             </nav>
           </div>

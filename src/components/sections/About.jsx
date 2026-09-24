@@ -2,11 +2,12 @@ import { ArrowRight, Target } from 'lucide-react'
 import Section from '../ui/Section'
 import SectionHeader from '../ui/SectionHeader'
 import ActionLink from '../ui/ActionLink'
+import Reveal from '../ui/Reveal'
 import { ABOUT } from '../../data/about'
 
 function FocusCard() {
   return (
-    <aside className="relative overflow-hidden rounded-3xl border border-border bg-surface p-6 shadow-[0_1px_2px_rgba(15,21,18,0.04)] sm:p-8">
+    <aside className="relative overflow-hidden rounded-3xl border border-border bg-surface p-5 shadow-[0_1px_2px_rgba(15,21,18,0.04)] sm:p-8">
       {/* Soft corner glow for depth */}
       <div
         aria-hidden="true"
@@ -30,7 +31,7 @@ function FocusCard() {
               <Icon size={18} aria-hidden="true" />
             </span>
             <span className="flex-1 text-sm font-medium sm:text-[15px]">{label}</span>
-            <span className="text-xs font-semibold tabular-nums text-muted/60">
+            <span aria-hidden="true" className="text-xs font-semibold tabular-nums text-muted/60">
               {String(index + 1).padStart(2, '0')}
             </span>
           </li>
@@ -63,26 +64,28 @@ export default function About() {
         <div>
           <SectionHeader badge={ABOUT.badge} title={ABOUT.title} />
 
-          <div className="mt-6 space-y-4 text-base leading-relaxed text-muted sm:text-lg">
+          <Reveal delay={100} className="mt-6 space-y-4 text-base leading-relaxed text-muted sm:text-lg">
             {ABOUT.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
-          </div>
+          </Reveal>
 
-          <ul className="mt-8 flex flex-wrap gap-2">
+          <Reveal as="ul" delay={200} className="mt-8 flex flex-wrap gap-2">
             {ABOUT.highlights.map(({ label, icon: Icon }) => (
               <li
                 key={label}
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3.5 py-1.5 text-sm font-medium text-foreground/80"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3.5 py-1.5 text-sm font-medium text-foreground/80 transition-colors duration-200 hover:border-accent/30 hover:text-accent"
               >
                 <Icon size={15} className="text-accent" aria-hidden="true" />
                 {label}
               </li>
             ))}
-          </ul>
+          </Reveal>
         </div>
 
-        <FocusCard />
+        <Reveal delay={150}>
+          <FocusCard />
+        </Reveal>
       </div>
     </Section>
   )
