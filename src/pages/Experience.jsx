@@ -29,28 +29,28 @@ function TimelineItem({ item, isLast }) {
   const { role, company, type, period, description, responsibilities, tech } = item
 
   return (
-    // Mobile: rail on the left. md+: meta column | rail | card.
+    // Mobile/tablet: rail on the left, dates inside the card. lg+: date column | rail | card.
     <Reveal
       as="li"
-      className="relative pb-10 pl-8 last:pb-0 sm:pl-10 md:grid md:grid-cols-[13rem_1fr] md:gap-x-14 md:pl-0"
+      className="relative pb-10 pl-8 last:pb-0 sm:pl-10 lg:grid lg:grid-cols-[15rem_1fr] lg:gap-x-14 lg:pl-0"
     >
       {/* Rail — fades out after the final entry */}
       <span
         aria-hidden="true"
-        className={`absolute top-3 bottom-0 left-[11px] w-px md:left-[calc(13rem+1.75rem)] ${
+        className={`absolute top-3 bottom-0 left-[11px] w-px lg:left-[calc(15rem+1.75rem)] ${
           isLast ? 'bg-gradient-to-b from-accent/50 to-transparent' : 'bg-gradient-to-b from-accent/50 to-border'
         }`}
       />
       {/* Node */}
       <span
         aria-hidden="true"
-        className="absolute top-1 left-0 flex size-6 items-center justify-center rounded-full border-2 border-accent bg-background shadow-[0_0_0_4px_var(--color-accent-soft)] md:left-[calc(13rem+1.75rem-12px)]"
+        className="absolute top-1 left-0 flex size-6 items-center justify-center rounded-full border-2 border-accent bg-background shadow-[0_0_0_4px_var(--color-accent-soft)] lg:left-[calc(15rem+1.75rem-12px)]"
       >
         <span className="size-2 rounded-full bg-accent" />
       </span>
 
       {/* Desktop meta column */}
-      <div className="hidden pt-0.5 md:block md:text-right">
+      <div className="hidden pt-0.5 lg:block lg:text-right">
         <Period period={period} className="whitespace-nowrap" />
         <div className="mt-3">
           <TypeBadge type={type} />
@@ -59,7 +59,7 @@ function TimelineItem({ item, isLast }) {
 
       <article className="group rounded-3xl border border-border bg-background p-5 shadow-[0_1px_2px_rgba(15,21,18,0.04)] transition-[translate,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-accent/25 hover:shadow-[0_18px_40px_-16px_rgba(15,21,18,0.14)] sm:p-8">
         {/* Mobile meta row */}
-        <div className="mb-4 flex flex-wrap items-center gap-3 md:hidden">
+        <div className="mb-4 flex flex-wrap items-center gap-3 lg:hidden">
           <TypeBadge type={type} />
           <Period period={period} />
         </div>

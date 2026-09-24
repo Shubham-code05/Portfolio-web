@@ -381,6 +381,21 @@ export const ALL_PROJECTS_URL = `${GITHUB_URL}?tab=repositories`
 // Optional fields (description, tech) are simply not rendered when omitted.
 export const EXPERIENCE = [
   {
+    role: 'Web Development Intern',
+    company: 'Squareit Solutions',
+    type: 'Internship',
+    period: '6 June 2026 – 6 September 2026',
+    responsibilities: [
+      'Developed web applications using the MERN stack (MongoDB, Express.js, React.js, Node.js)',
+      'Built and integrated frontend interfaces, backend services, and REST APIs',
+      'Worked with database management, data modeling, authentication, and application functionality',
+      'Worked on deploying and managing web applications, including domains, DNS configuration, hosting, and SSL',
+      'Troubleshot, debugged, and maintained deployed applications',
+      'Explored Artificial Intelligence, Generative AI, and emerging AI technologies',
+    ],
+    tech: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'REST APIs', 'Git', 'Deployment', 'AI'],
+  },
+  {
     role: 'Full Stack Developer Intern',
     company: 'UpToSkills',
     type: 'Internship',
