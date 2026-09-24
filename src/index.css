@@ -12,6 +12,14 @@
   --color-accent-soft: #ecfdf3;
 
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
 }
 
 @layer base {
