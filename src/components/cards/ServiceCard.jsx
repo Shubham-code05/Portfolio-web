@@ -20,7 +20,7 @@ export default function ServiceCard({ service, index }) {
         </span>
       </div>
 
-      <h3 className="mt-6 text-xl font-semibold tracking-tight">{title}</h3>
+      <h2 className="mt-6 text-xl font-semibold tracking-tight">{title}</h2>
       <p className="mt-3 text-sm leading-relaxed text-muted sm:text-[15px]">{description}</p>
 
       <ul className="mt-6 space-y-3 border-t border-border pt-6">

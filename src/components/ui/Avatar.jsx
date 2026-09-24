@@ -13,7 +13,7 @@ function getInitials(name) {
  * `priority` loads the photo eagerly (above-the-fold usage like the navbar).
  */
 export default function Avatar({ src, name, decorative = false, priority = false, className = '' }) {
-  const base = `shrink-0 rounded-full ring-2 ring-accent/15 ring-offset-2 ring-offset-background ${className}`
+  const base = `shrink-0 rounded-[50%] ring-2 ring-accent/15 ring-offset-2 ring-offset-background ${className}`
 
   if (src) {
     return (

@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom'
 import { ArrowRight, Target } from 'lucide-react'
-import Section from '../ui/Section'
-import SectionHeader from '../ui/SectionHeader'
-import ActionLink from '../ui/ActionLink'
-import Reveal from '../ui/Reveal'
-import { ABOUT } from '../../data/about'
+import PageHeader from '../components/PageHeader'
+import Section from '../components/ui/Section'
+import ActionLink from '../components/ui/ActionLink'
+import Reveal from '../components/ui/Reveal'
+import usePageMeta from '../hooks/usePageMeta'
+import { ABOUT, PAGES } from '../data/portfolioData'
 
 function FocusCard() {
   return (
@@ -18,7 +20,7 @@ function FocusCard() {
         <span className="flex size-10 items-center justify-center rounded-xl bg-accent text-white shadow-sm shadow-accent/30">
           <Target size={20} aria-hidden="true" />
         </span>
-        <h3 className="text-lg font-semibold tracking-tight">Current Technical Focus</h3>
+        <h2 className="text-lg font-semibold tracking-tight">Current Technical Focus</h2>
       </div>
 
       <ol className="relative mt-6 space-y-2">
@@ -46,47 +48,52 @@ function FocusCard() {
           Read More
           <ArrowRight size={16} className="transition-transform duration-200 group-hover/btn:translate-x-1" />
         </ActionLink>
-        <a
-          href="#skills"
+        <Link
+          to="/skills"
           className="inline-flex flex-1 items-center justify-center rounded-full border border-border bg-background px-5 py-2.5 text-sm font-semibold text-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/30 hover:text-accent"
         >
           View Skills
-        </a>
+        </Link>
       </div>
     </aside>
   )
 }
 
 export default function About() {
+  const page = PAGES.about
+  usePageMeta(page.title)
+
   return (
-    <Section id="about">
-      <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
-        <div>
-          <SectionHeader badge={ABOUT.badge} title={ABOUT.title} />
+    <>
+      <PageHeader badge={page.badge} title={page.heading} />
 
-          <Reveal delay={100} className="mt-6 space-y-4 text-base leading-relaxed text-muted sm:text-lg">
-            {ABOUT.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </Reveal>
+      <Section>
+        <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
+          <div>
+            <Reveal className="space-y-4 text-base leading-relaxed text-muted sm:text-lg">
+              {ABOUT.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </Reveal>
 
-          <Reveal as="ul" delay={200} className="mt-8 flex flex-wrap gap-2">
-            {ABOUT.highlights.map(({ label, icon: Icon }) => (
-              <li
-                key={label}
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3.5 py-1.5 text-sm font-medium text-foreground/80 transition-colors duration-200 hover:border-accent/30 hover:text-accent"
-              >
-                <Icon size={15} className="text-accent" aria-hidden="true" />
-                {label}
-              </li>
-            ))}
+            <Reveal as="ul" delay={100} className="mt-8 flex flex-wrap gap-2">
+              {ABOUT.highlights.map(({ label, icon: Icon }) => (
+                <li
+                  key={label}
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3.5 py-1.5 text-sm font-medium text-foreground/80 transition-colors duration-200 hover:border-accent/30 hover:text-accent"
+                >
+                  <Icon size={15} className="text-accent" aria-hidden="true" />
+                  {label}
+                </li>
+              ))}
+            </Reveal>
+          </div>
+
+          <Reveal delay={150}>
+            <FocusCard />
           </Reveal>
         </div>
-
-        <Reveal delay={150}>
-          <FocusCard />
-        </Reveal>
-      </div>
-    </Section>
+      </Section>
+    </>
   )
 }

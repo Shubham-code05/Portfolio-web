@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
-import Avatar from '../ui/Avatar'
-import useActiveSection from '../../hooks/useActiveSection'
-import { NAV_LINKS, SECTION_IDS } from '../../data/navigation'
-import { PROFILE } from '../../data/profile'
+import Avatar from './ui/Avatar'
+import { CONTACT_PATH, NAV_LINKS, PROFILE } from '../data/portfolioData'
 
 // Must match Tailwind's `xl` breakpoint, where the desktop nav appears
 const DESKTOP_QUERY = '(min-width: 80rem)'
@@ -23,26 +22,38 @@ function StatusIndicator() {
 }
 
 // Display (inline-flex/hidden) is set by the caller so responsive visibility classes never conflict
-function ContactButton({ onClick, className = '' }) {
+function ContactButton({ className = '' }) {
   return (
-    <a
-      href="#contact"
-      onClick={onClick}
-      className={`group items-center justify-center gap-1.5 rounded-full bg-accent px-4 py-2 text-sm font-medium text-white shadow-sm shadow-accent/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent-hover hover:shadow-md hover:shadow-accent/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${className}`}
+    <Link
+      to={CONTACT_PATH}
+      className={`group items-center justify-center gap-1.5 rounded-full bg-accent px-4 py-2 text-sm font-medium text-white shadow-sm shadow-accent/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent-hover hover:shadow-md hover:shadow-accent/25 ${className}`}
     >
       Contact Me
       <ArrowUpRight
         size={16}
         className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
       />
-    </a>
+    </Link>
   )
 }
 
+const desktopLinkClass = ({ isActive }) =>
+  `rounded-full px-3 py-1.5 text-sm font-medium transition-colors duration-200 ${
+    isActive ? 'bg-accent-soft text-accent' : 'text-muted hover:bg-surface hover:text-foreground'
+  }`
+
+const mobileLinkClass = ({ isActive }) =>
+  `flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition-colors duration-200 ${
+    isActive ? 'bg-accent-soft text-accent' : 'text-muted hover:bg-surface hover:text-foreground'
+  }`
+
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
+  const location = useLocation()
+  // The menu is "open" only for the location it was opened on, so any navigation
+  // (link tap, back/forward) closes it without an extra effect.
+  const [openAt, setOpenAt] = useState(null)
+  const isOpen = openAt === location.key
   const [isScrolled, setIsScrolled] = useState(false)
-  const activeId = useActiveSection(SECTION_IDS)
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 8)
@@ -56,8 +67,8 @@ export default function Navbar() {
     if (!isOpen) return
 
     const desktop = window.matchMedia(DESKTOP_QUERY)
-    const onKeyDown = (event) => event.key === 'Escape' && setIsOpen(false)
-    const onBreakpoint = (event) => event.matches && setIsOpen(false)
+    const onKeyDown = (event) => event.key === 'Escape' && setOpenAt(null)
+    const onBreakpoint = (event) => event.matches && setOpenAt(null)
 
     window.addEventListener('keydown', onKeyDown)
     desktop.addEventListener('change', onBreakpoint)
@@ -67,7 +78,8 @@ export default function Navbar() {
     }
   }, [isOpen])
 
-  const closeMenu = () => setIsOpen(false)
+  const closeMenu = () => setOpenAt(null)
+  const toggleMenu = () => setOpenAt(isOpen ? null : location.key)
   const isElevated = isScrolled || isOpen
 
   return (
@@ -80,11 +92,10 @@ export default function Navbar() {
         }`}
       >
         <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <a href="#hero" onClick={closeMenu} className="group flex min-w-0 items-center gap-3">
+          <Link to="/" onClick={closeMenu} className="group flex min-w-0 items-center gap-3">
             <Avatar
-              src={PROFILE.avatar}
+              src={PROFILE.photo}
               name={PROFILE.name}
-              decorative
               priority
               className="size-9 transition-transform duration-200 group-hover:scale-105"
             />
@@ -94,28 +105,17 @@ export default function Navbar() {
                 {PROFILE.role}
               </span>
             </span>
-          </a>
+          </Link>
 
           <nav aria-label="Primary" className="hidden xl:block">
             <ul className="flex items-center gap-1">
-              {NAV_LINKS.map(({ label, href }) => {
-                const isActive = activeId === href.slice(1)
-                return (
-                  <li key={href}>
-                    <a
-                      href={href}
-                      aria-current={isActive ? 'location' : undefined}
-                      className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors duration-200 ${
-                        isActive
-                          ? 'bg-accent-soft text-accent'
-                          : 'text-muted hover:bg-surface hover:text-foreground'
-                      }`}
-                    >
-                      {label}
-                    </a>
-                  </li>
-                )
-              })}
+              {NAV_LINKS.map(({ label, to }) => (
+                <li key={to}>
+                  <NavLink to={to} end={to === '/'} className={desktopLinkClass}>
+                    {label}
+                  </NavLink>
+                </li>
+              ))}
             </ul>
           </nav>
 
@@ -126,7 +126,7 @@ export default function Navbar() {
             <ContactButton className="hidden sm:inline-flex" />
             <button
               type="button"
-              onClick={() => setIsOpen((open) => !open)}
+              onClick={toggleMenu}
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
@@ -148,31 +148,23 @@ export default function Navbar() {
           <div className="overflow-hidden">
             <nav aria-label="Mobile" className="mx-auto max-w-7xl px-4 pt-2 pb-5 sm:px-6 lg:px-8">
               <ul className="grid gap-1 sm:grid-cols-2">
-                {NAV_LINKS.map(({ label, href }) => {
-                  const isActive = activeId === href.slice(1)
-                  return (
-                    <li key={href}>
-                      <a
-                        href={href}
-                        onClick={closeMenu}
-                        aria-current={isActive ? 'location' : undefined}
-                        className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition-colors duration-200 ${
-                          isActive
-                            ? 'bg-accent-soft text-accent'
-                            : 'text-muted hover:bg-surface hover:text-foreground'
-                        }`}
-                      >
-                        {label}
-                        {isActive && <span className="size-1.5 rounded-full bg-accent" />}
-                      </a>
-                    </li>
-                  )
-                })}
+                {NAV_LINKS.map(({ label, to }) => (
+                  <li key={to}>
+                    <NavLink to={to} end={to === '/'} onClick={closeMenu} className={mobileLinkClass}>
+                      {({ isActive }) => (
+                        <>
+                          {label}
+                          {isActive && <span className="size-1.5 rounded-full bg-accent" />}
+                        </>
+                      )}
+                    </NavLink>
+                  </li>
+                ))}
               </ul>
 
               <div className="mt-4 flex flex-col gap-3 border-t border-border pt-4 sm:flex-row sm:items-center sm:justify-between">
                 <StatusIndicator />
-                <ContactButton onClick={closeMenu} className="inline-flex sm:hidden" />
+                <ContactButton className="inline-flex sm:hidden" />
               </div>
             </nav>
           </div>

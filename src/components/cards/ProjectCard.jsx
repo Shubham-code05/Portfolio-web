@@ -54,8 +54,13 @@ function ProjectMedia({ project, index, featured }) {
   )
 }
 
-export default function ProjectCard({ project, index }) {
-  const { title, description, tech, links, featured = false } = project
+/**
+ * `headingLevel` matches the surrounding outline (2 under a page <h1>, 3 under a section <h2>).
+ * `featured` defaults to the project's own flag; pass false to force the compact layout (e.g. previews).
+ */
+export default function ProjectCard({ project, index, headingLevel = 2, featured = project.featured ?? false }) {
+  const { title, description, tech, links } = project
+  const Heading = `h${headingLevel}`
 
   return (
     <article
@@ -66,9 +71,9 @@ export default function ProjectCard({ project, index }) {
       <ProjectMedia project={project} index={index} featured={featured} />
 
       <div className={`flex flex-1 flex-col p-5 sm:p-8 ${featured ? 'lg:justify-center lg:p-10' : ''}`}>
-        <h3 className={`font-semibold tracking-tight text-balance ${featured ? 'text-xl sm:text-2xl' : 'text-xl'}`}>
+        <Heading className={`font-semibold tracking-tight text-balance ${featured ? 'text-xl sm:text-2xl' : 'text-xl'}`}>
           {title}
-        </h3>
+        </Heading>
         <p className="mt-3 text-sm leading-relaxed text-muted sm:text-[15px]">{description}</p>
 
         <ul className="mt-5 flex flex-wrap gap-2" aria-label="Technologies used">

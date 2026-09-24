@@ -1,15 +1,19 @@
+import { Link } from 'react-router-dom'
 import { ArrowUp } from 'lucide-react'
-import Container from '../ui/Container'
-import Avatar from '../ui/Avatar'
-import ActionLink from '../ui/ActionLink'
-import { CORE_AREAS, FOOTER_LINKS } from '../../data/navigation'
-import { CONTACT_LINKS } from '../../data/contact'
-import { PROFILE } from '../../data/profile'
+import Container from './ui/Container'
+import Avatar from './ui/Avatar'
+import ActionLink from './ui/ActionLink'
+import { CONTACT_LINKS, CORE_AREAS, FOOTER_LINKS, PROFILE } from '../data/portfolioData'
 
 function FooterHeading({ children }) {
   return (
     <h2 className="text-[11px] font-semibold tracking-[0.18em] text-foreground uppercase">{children}</h2>
   )
+}
+
+function scrollToTop() {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' })
 }
 
 export default function Footer() {
@@ -19,18 +23,18 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.3fr_2fr] lg:gap-16">
           {/* Brand */}
           <div className="max-w-sm">
-            <a href="#hero" className="group inline-flex items-center gap-3">
+            <Link to="/" className="group inline-flex items-center gap-3">
               <Avatar
                 src={PROFILE.avatar}
                 name={PROFILE.name}
-              decorative
+                decorative
                 className="size-10 transition-transform duration-200 group-hover:scale-105"
               />
               <span className="flex flex-col leading-tight">
                 <span className="font-semibold tracking-tight">{PROFILE.name}</span>
                 <span className="text-[11px] font-medium tracking-[0.16em] text-accent uppercase">Portfolio</span>
               </span>
-            </a>
+            </Link>
             <p className="mt-5 text-sm leading-relaxed text-muted">
               Building modern web experiences with code, AI and automation.
             </p>
@@ -40,15 +44,18 @@ export default function Footer() {
             <nav aria-label="Footer">
               <FooterHeading>Navigation</FooterHeading>
               <ul className="mt-5 space-y-3">
-                {FOOTER_LINKS.map(({ label, href }) => (
-                  <li key={href}>
-                    <a
-                      href={href}
+                {FOOTER_LINKS.map(({ label, to }) => (
+                  <li key={to}>
+                    <Link
+                      to={to}
                       className="group inline-flex items-center text-sm text-muted transition-colors duration-200 hover:text-accent"
                     >
-                      <span aria-hidden="true" className="h-px w-0 bg-accent transition-all duration-200 group-hover:mr-2 group-hover:w-3" />
+                      <span
+                        aria-hidden="true"
+                        className="h-px w-0 bg-accent transition-all duration-200 group-hover:mr-2 group-hover:w-3"
+                      />
                       {label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -91,13 +98,14 @@ export default function Footer() {
           <p className="text-center text-sm text-muted">
             © {new Date().getFullYear()} {PROFILE.name}. All rights reserved.
           </p>
-          <a
-            href="#hero"
+          <button
+            type="button"
+            onClick={scrollToTop}
             className="group inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-xs font-semibold text-foreground/80 transition-all duration-200 hover:border-accent/30 hover:text-accent"
           >
             Back to top
             <ArrowUp size={14} className="transition-transform duration-200 group-hover:-translate-y-0.5" />
-          </a>
+          </button>
         </div>
       </Container>
     </footer>

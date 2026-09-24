@@ -1,38 +1,33 @@
-import Navbar from './components/layout/Navbar'
-import Footer from './components/layout/Footer'
-import Hero from './components/sections/Hero'
-import TechStack from './components/sections/TechStack'
-import About from './components/sections/About'
-import Skills from './components/sections/Skills'
-import Services from './components/sections/Services'
-import Projects from './components/sections/Projects'
-import Experience from './components/sections/Experience'
-import Education from './components/sections/Education'
-import Contact from './components/sections/Contact'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Layout from './components/Layout'
+import Home from './pages/Home'
+import About from './pages/About'
+import Skills from './pages/Skills'
+import Services from './pages/Services'
+import Projects from './pages/Projects'
+import Experience from './pages/Experience'
+import Education from './pages/Education'
+import Profile from './pages/Profile'
+import NotFound from './pages/NotFound'
+
+// Data router (not <BrowserRouter>) so <ScrollRestoration> is available in Layout
+const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      { path: '/', element: <Home /> },
+      { path: '/about', element: <About /> },
+      { path: '/skills', element: <Skills /> },
+      { path: '/services', element: <Services /> },
+      { path: '/projects', element: <Projects /> },
+      { path: '/experience', element: <Experience /> },
+      { path: '/education', element: <Education /> },
+      { path: '/profile', element: <Profile /> },
+      { path: '*', element: <NotFound /> },
+    ],
+  },
+])
 
 export default function App() {
-  return (
-    <>
-      {/* Lets keyboard users jump past the navbar; visible only when focused */}
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-full focus:bg-foreground focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
-      >
-        Skip to content
-      </a>
-      <Navbar />
-      <main id="main" tabIndex={-1} className="outline-none">
-        <Hero />
-        <TechStack />
-        <About />
-        <Skills />
-        <Services />
-        <Projects />
-        <Experience />
-        <Education />
-        <Contact />
-      </main>
-      <Footer />
-    </>
-  )
+  return <RouterProvider router={router} />
 }

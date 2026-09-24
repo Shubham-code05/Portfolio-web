@@ -1,5 +1,5 @@
 import Reveal from '../ui/Reveal'
-import { TECH_STACK } from '../../data/techStack'
+import { TECH_STACK } from '../../data/portfolioData'
 
 function TechList({ hidden = false }) {
   return (
@@ -18,7 +18,8 @@ function TechList({ hidden = false }) {
   )
 }
 
-export default function TechStack() {
+/** `action` renders below the strip (e.g. a link to the full Skills page). */
+export default function TechStack({ action }) {
   return (
     <section
       id="tech-stack"
@@ -38,6 +39,8 @@ export default function TechStack() {
             <TechList hidden />
           </div>
         </div>
+
+        {action && <div className="mt-6 flex justify-center px-4">{action}</div>}
       </Reveal>
     </section>
   )

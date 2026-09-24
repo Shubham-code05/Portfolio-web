@@ -25,9 +25,9 @@ export default function EducationCard({ education }) {
         <span className="inline-flex rounded-full border border-accent/20 bg-accent-soft px-3 py-1 text-xs font-semibold text-accent">
           {degree}
         </span>
-        <h3 className="mt-4 text-xl font-semibold tracking-tight text-balance sm:text-2xl">
+        <h2 className="mt-4 text-xl font-semibold tracking-tight text-balance sm:text-2xl">
           {degree} — {field}
-        </h3>
+        </h2>
 
         <div className="mt-4 space-y-2 text-sm text-foreground/80 sm:text-[15px]">
           <p className="flex items-start gap-2.5">
@@ -54,9 +54,9 @@ export default function EducationCard({ education }) {
 
         {focus?.length > 0 && (
           <div className="mt-6 border-t border-border pt-6">
-            <h4 className="text-[11px] font-semibold tracking-[0.18em] text-muted uppercase">
+            <h3 className="text-[11px] font-semibold tracking-[0.18em] text-muted uppercase">
               Relevant Focus
-            </h4>
+            </h3>
             <ul className="mt-4 grid gap-2 sm:grid-cols-2">
               {focus.map(({ label, icon: Icon }) => (
                 <li

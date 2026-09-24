@@ -2,7 +2,7 @@ import { ArrowUpRight, Download, Send } from 'lucide-react'
 import Section from '../ui/Section'
 import Reveal from '../ui/Reveal'
 import ActionLink from '../ui/ActionLink'
-import { CONTACT_LINKS, EMAIL_HREF, RESUME_URL } from '../../data/contact'
+import { CONTACT_LINKS, EMAIL_HREF, RESUME_URL } from '../../data/portfolioData'
 
 function ContactRow({ label, value, href, icon: Icon }) {
   return (

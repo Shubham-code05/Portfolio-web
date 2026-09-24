@@ -1,8 +1,9 @@
 import { Briefcase, Building2, CalendarDays, CircleCheck } from 'lucide-react'
-import Section from '../ui/Section'
-import SectionHeader from '../ui/SectionHeader'
-import Reveal from '../ui/Reveal'
-import { EXPERIENCE } from '../../data/experience'
+import PageHeader from '../components/PageHeader'
+import Section from '../components/ui/Section'
+import Reveal from '../components/ui/Reveal'
+import usePageMeta from '../hooks/usePageMeta'
+import { EXPERIENCE, PAGES } from '../data/portfolioData'
 
 function TypeBadge({ type }) {
   if (!type) return null
@@ -63,7 +64,7 @@ function TimelineItem({ item, isLast }) {
           <Period period={period} />
         </div>
 
-        <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">{role}</h3>
+        <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">{role}</h2>
         <p className="mt-2 inline-flex items-center gap-2 text-sm font-medium text-foreground/80 sm:text-base">
           <Building2 size={16} className="text-accent" aria-hidden="true" />
           {company}
@@ -75,9 +76,9 @@ function TimelineItem({ item, isLast }) {
 
         {responsibilities?.length > 0 && (
           <div className="mt-6 border-t border-border pt-6">
-            <h4 className="text-[11px] font-semibold tracking-[0.18em] text-muted uppercase">
+            <h3 className="text-[11px] font-semibold tracking-[0.18em] text-muted uppercase">
               Responsibilities
-            </h4>
+            </h3>
             <ul className="mt-4 grid gap-3 lg:grid-cols-2 lg:gap-x-8">
               {responsibilities.map((responsibility) => (
                 <li key={responsibility} className="flex gap-3 text-sm text-foreground/80">
@@ -107,19 +108,24 @@ function TimelineItem({ item, isLast }) {
 }
 
 export default function Experience() {
-  return (
-    <Section id="experience" className="border-y border-border bg-surface">
-      <SectionHeader badge="Career Journey" title="Professional Experience" />
+  const page = PAGES.experience
+  usePageMeta(page.title)
 
-      <ol className="mt-10 sm:mt-12">
-        {EXPERIENCE.map((item, index) => (
-          <TimelineItem
-            key={`${item.company}-${item.period}`}
-            item={item}
-            isLast={index === EXPERIENCE.length - 1}
-          />
-        ))}
-      </ol>
-    </Section>
+  return (
+    <>
+      <PageHeader badge={page.badge} title={page.heading} />
+
+      <Section>
+        <ol>
+          {EXPERIENCE.map((item, index) => (
+            <TimelineItem
+              key={`${item.company}-${item.period}`}
+              item={item}
+              isLast={index === EXPERIENCE.length - 1}
+            />
+          ))}
+        </ol>
+      </Section>
+    </>
   )
 }

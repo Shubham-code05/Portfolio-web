@@ -1,6 +1,9 @@
 import Reveal from './Reveal'
 
-export default function SectionHeader({ badge, title, subtitle, className = '' }) {
+/** `level` sets the heading element: 1 for a page's main heading, 2 (default) for sections. */
+export default function SectionHeader({ badge, title, subtitle, level = 2, className = '' }) {
+  const Heading = `h${level}`
+
   return (
     <Reveal className={`max-w-2xl ${className}`}>
       {badge && (
@@ -9,7 +12,13 @@ export default function SectionHeader({ badge, title, subtitle, className = '' }
           {badge}
         </span>
       )}
-      <h2 className="mt-4 text-3xl font-bold tracking-tight text-balance sm:text-4xl">{title}</h2>
+      <Heading
+        className={`mt-4 font-bold tracking-tight text-balance ${
+          level === 1 ? 'text-4xl sm:text-5xl' : 'text-3xl sm:text-4xl'
+        }`}
+      >
+        {title}
+      </Heading>
       {subtitle && <p className="mt-3 text-base text-muted sm:text-lg">{subtitle}</p>}
     </Reveal>
   )

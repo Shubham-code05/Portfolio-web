@@ -8,7 +8,7 @@ export default function SkillCard({ category }) {
           <span className="flex size-11 items-center justify-center rounded-2xl bg-accent-soft text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-white group-hover:shadow-md group-hover:shadow-accent/25">
             <Icon size={20} aria-hidden="true" />
           </span>
-          <h3 className="text-lg font-semibold tracking-tight">{title}</h3>
+          <h2 className="text-lg font-semibold tracking-tight">{title}</h2>
         </div>
         <span className="shrink-0 text-xs font-medium whitespace-nowrap text-muted">
           {skills.length} {skills.length === 1 ? 'skill' : 'skills'}

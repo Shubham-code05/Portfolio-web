@@ -18,10 +18,18 @@
 
   --animate-marquee: marquee 40s linear infinite;
   --animate-nav-in: nav-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-photo-in: photo-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
 
   @keyframes marquee {
     to {
       transform: translateX(-50%);
+    }
+  }
+
+  @keyframes photo-in {
+    from {
+      opacity: 0;
+      transform: scale(0.94);
     }
   }
 
@@ -34,15 +42,8 @@
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-  }
+  /* No global smooth scrolling: route changes must reset/restore scroll instantly.
+     "Back to top" opts into smooth scrolling explicitly. */
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
